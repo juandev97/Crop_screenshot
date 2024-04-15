@@ -1,6 +1,6 @@
 import os 
-import PyPDF2
-import webbrowser
+#import PyPDF2
+#import webbrowser
 from PIL import Image, ImageGrab
 import time
 
