@@ -15,6 +15,8 @@ import random
 
 
         
+
+        
 class Scene:
     def __init__(self, window: tk.Tk, screen_instance):
         self.screen_instance = screen_instance
@@ -24,7 +26,7 @@ class Scene:
             window, 
             width=self.screen_width,
             height=self.screen_height, 
-            highlightthickness=0,  
+            highlightthickness=0,
             bg='white'
         )
         self.capture = tk.Button(window, text="Tomar Screenshot", command=self.takeScreenshot)
@@ -35,7 +37,25 @@ class Scene:
         self.center.place(x=100,y=450)
         self.close.place(x=100,y=490)
         self.canvas.pack()
-        self.x1, self.y1, self.x2, self.y2 = 500, 500, 900, 900
+
+        rect_width = 150
+        rect_height = 100
+
+        canvas_width = window.winfo_screenwidth()
+        canvas_height = window.winfo_screenheight()
+
+        canvas_center_x = canvas_width // 2
+        canvas_center_y = canvas_height // 2
+        print(self.canvas.winfo_geometry())
+        print(canvas_width)
+        print(self.canvas.winfo_height())
+        
+        self.x1 = canvas_center_x - rect_width 
+        self.y1 = canvas_center_y - rect_height
+        self.x2 = canvas_center_x + rect_width 
+        self.y2 = canvas_center_y + rect_height 
+        print(self.x1)
+        #self.x1, self.y1, self.x2, self.y2 = 500, 500, 600, 900
 
     def clear_canvas(self):
         self.canvas.delete('all')
@@ -54,6 +74,8 @@ class Scene:
         self.canvas.bind("<Button-1>", self.on_canvas_click)
         self.canvas.bind("<B1-Motion>", self.on_canvas_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_canvas_release)
+
+
 
 
     def on_canvas_click(self, event):
